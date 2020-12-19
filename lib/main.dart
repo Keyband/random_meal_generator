@@ -64,7 +64,21 @@ class _MyHomePageState extends State<MyHomePage> {
               future: futureAlbum,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Text(snapshot.data.strMeal); //
+                  return Column(
+                    children: <Widget>[
+                      Text(snapshot.data.strMeal),
+                      Image.network(
+                        snapshot.data.strMealThumb,
+                        width: 640,
+                        height: 360,
+                        loadingBuilder: (context, child, progress) {
+                          return progress == null
+                              ? child
+                              : LinearProgressIndicator();
+                        },
+                      )
+                    ],
+                  );
                 } else if (snapshot.hasError) {
                   return Text("${snapshot.error}");
                 }
@@ -85,15 +99,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class Album {
   final String strMeal;
+  final String strMealThumb;
   // final int id;
   //final String title;
 
-  Album({this.strMeal});
+  Album({this.strMeal, this.strMealThumb});
 
   factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      strMeal: json['strMeal'],
-    );
+    return Album(strMeal: json['strMeal'], strMealThumb: json['strMealThumb']);
   }
 }
 
