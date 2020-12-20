@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
           alignment: Alignment.center,
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               FutureBuilder<Album>(
@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
                           snapshot.data.strMeal,
@@ -82,7 +82,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             loadingBuilder: (context, child, progress) {
                               return progress == null
                                   ? child
-                                  : CircularProgressIndicator();
+                                  : Container(
+                                      padding: const EdgeInsets.all(8.0),
+                                      width: 255.0,
+                                      height: 255.0,
+                                      child: CircularProgressIndicator());
                             },
                           ),
                         )
@@ -90,8 +94,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                   } else if (snapshot.hasError) {
                     return Text("${snapshot.error}");
+                  } else {
+                    return CircularProgressIndicator();
                   }
-                  return CircularProgressIndicator();
                 },
               ),
               RaisedButton(
