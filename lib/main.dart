@@ -19,21 +19,17 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   final String title;
-
-  MyHomePage({this.title});
+  MyHomePage({this.title = 'Title'});
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
   Future<Album> futureAlbum;
 
-  void _incrementCounter() {
+  void _newMeal() {
     setState(() {
-      _counter++;
       print('Fetching new food');
       futureAlbum = fetchAlbum();
     });
@@ -52,46 +48,59 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text('Nome da comida'),
-            RaisedButton(
-              child: Text('Gerar comida'),
-              onPressed: _incrementCounter,
-            ),
-            FutureBuilder<Album>(
-              future: futureAlbum,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Column(
-                    children: <Widget>[
-                      Text(snapshot.data.strMeal),
-                      Image.network(
-                        snapshot.data.strMealThumb,
-                        width: 640,
-                        height: 360,
-                        loadingBuilder: (context, child, progress) {
-                          return progress == null
-                              ? child
-                              : LinearProgressIndicator();
-                        },
-                      )
-                    ],
-                  );
-                } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
-                }
-                return CircularProgressIndicator();
-              },
-            )
-          ],
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          alignment: Alignment.center,
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              FutureBuilder<Album>(
+                future: futureAlbum,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Text(
+                          snapshot.data.strMeal,
+                          style: new TextStyle(
+                              fontSize: 24.0,
+                              color: const Color(0xFF000000),
+                              fontWeight: FontWeight.w300,
+                              fontFamily: "Roboto"),
+                        ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.network(
+                            snapshot.data.strMealThumb,
+                            fit: BoxFit.cover,
+                            width: 255.0,
+                            height: 255.0,
+                            loadingBuilder: (context, child, progress) {
+                              return progress == null
+                                  ? child
+                                  : CircularProgressIndicator();
+                            },
+                          ),
+                        )
+                      ],
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text("${snapshot.error}");
+                  }
+                  return CircularProgressIndicator();
+                },
+              ),
+              RaisedButton(
+                child: Text('Gerar comida'),
+                onPressed: _newMeal,
+              ),
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
