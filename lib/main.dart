@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert' as dartConvert;
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,6 +28,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Future<Album> futureAlbum;
+
+  _launchURL(url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   void _newMeal() {
     setState(() {
@@ -74,20 +83,25 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            snapshot.data.strMealThumb,
-                            fit: BoxFit.cover,
-                            width: 255.0,
-                            height: 255.0,
-                            loadingBuilder: (context, child, progress) {
-                              return progress == null
-                                  ? child
-                                  : Container(
-                                      padding: const EdgeInsets.all(8.0),
-                                      width: 255.0,
-                                      height: 255.0,
-                                      child: CircularProgressIndicator());
+                          child: GestureDetector(
+                            onTap: () {
+                              _launchURL(snapshot.data.strVideoUrl);
                             },
+                            child: Image.network(
+                              snapshot.data.strMealThumb,
+                              fit: BoxFit.cover,
+                              width: 255.0,
+                              height: 255.0,
+                              loadingBuilder: (context, child, progress) {
+                                return progress == null
+                                    ? child
+                                    : Container(
+                                        padding: const EdgeInsets.all(8.0),
+                                        width: 255.0,
+                                        height: 255.0,
+                                        child: CircularProgressIndicator());
+                              },
+                            ),
                           ),
                         )
                       ],
@@ -114,13 +128,17 @@ class _MyHomePageState extends State<MyHomePage> {
 class Album {
   final String strMeal;
   final String strMealThumb;
+  final String strVideoUrl;
   // final int id;
   //final String title;
 
-  Album({this.strMeal, this.strMealThumb});
+  Album({this.strMeal, this.strMealThumb, this.strVideoUrl});
 
   factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(strMeal: json['strMeal'], strMealThumb: json['strMealThumb']);
+    return Album(
+        strMeal: json['strMeal'],
+        strMealThumb: json['strMealThumb'],
+        strVideoUrl: json['strYoutube']);
   }
 }
 
