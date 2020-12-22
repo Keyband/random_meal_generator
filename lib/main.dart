@@ -58,6 +58,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Container(
+          decoration: BoxDecoration(
+              // border: Border.all(color: Colors.amber[800], width: 8),
+              // borderRadius: BorderRadius.circular(8.0),
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.amber, Colors.yellow])),
           width: double.infinity,
           height: double.infinity,
           alignment: Alignment.center,
