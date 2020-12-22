@@ -130,6 +130,11 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             ),
                           ),
+                          Text(
+                            'Tap the image to see a video!',
+                            style: TextStyle(
+                                color: Colors.grey[800], fontSize: 12),
+                          ),
                           SizedBox(height: 16),
                           Text(
                             'About',
