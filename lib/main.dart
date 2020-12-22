@@ -156,7 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Spacer(),
                 RaisedButton(
-                  child: Text('Gerar comida'),
+                  child: Text('Get a new meal!'),
                   onPressed: _newMeal,
                 ),
               ],
