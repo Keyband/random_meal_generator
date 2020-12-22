@@ -60,8 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Container(
           decoration: BoxDecoration(
-              // border: Border.all(color: Colors.amber[800], width: 8),
-              // borderRadius: BorderRadius.circular(8.0),
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -71,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
           alignment: Alignment.center,
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.fromLTRB(16, 64, 16, 128),
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.amber[800], width: 2),
                 borderRadius: BorderRadius.circular(8.0)),
@@ -84,7 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
                             snapshot.data.strMeal,
@@ -94,26 +93,34 @@ class _MyHomePageState extends State<MyHomePage> {
                                 fontWeight: FontWeight.w300,
                                 fontFamily: "Roboto"),
                           ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                _launchURL(snapshot.data.strVideoUrl);
-                              },
-                              child: Image.network(
-                                snapshot.data.strMealThumb,
-                                fit: BoxFit.cover,
-                                width: 255.0,
-                                height: 255.0,
-                                loadingBuilder: (context, child, progress) {
-                                  return progress == null
-                                      ? child
-                                      : Container(
-                                          padding: const EdgeInsets.all(8.0),
-                                          width: 255.0,
-                                          height: 255.0,
-                                          child: CircularProgressIndicator());
+                          SizedBox(height: 16),
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Colors.amber[800], width: 4),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(2.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  _launchURL(snapshot.data.strVideoUrl);
                                 },
+                                child: Image.network(
+                                  snapshot.data.strMealThumb,
+                                  fit: BoxFit.cover,
+                                  width: 255.0,
+                                  height: 255.0,
+                                  loadingBuilder: (context, child, progress) {
+                                    return progress == null
+                                        ? child
+                                        : Container(
+                                            padding: const EdgeInsets.all(8.0),
+                                            width: 255.0,
+                                            height: 255.0,
+                                            child: CircularProgressIndicator());
+                                  },
+                                ),
                               ),
                             ),
                           )
@@ -126,6 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     }
                   },
                 ),
+                Spacer(),
                 RaisedButton(
                   child: Text('Gerar comida'),
                   onPressed: _newMeal,
