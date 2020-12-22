@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'dart:convert' as dartConvert;
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
@@ -102,24 +103,29 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(2.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  _launchURL(snapshot.data.strVideoUrl);
-                                },
-                                child: Image.network(
-                                  snapshot.data.strMealThumb,
-                                  fit: BoxFit.cover,
-                                  width: 255.0,
-                                  height: 255.0,
-                                  loadingBuilder: (context, child, progress) {
-                                    return progress == null
-                                        ? child
-                                        : Container(
-                                            padding: const EdgeInsets.all(8.0),
-                                            width: 255.0,
-                                            height: 255.0,
-                                            child: CircularProgressIndicator());
+                              child: MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    _launchURL(snapshot.data.strVideoUrl);
                                   },
+                                  child: Image.network(
+                                    snapshot.data.strMealThumb,
+                                    fit: BoxFit.cover,
+                                    width: 255.0,
+                                    height: 255.0,
+                                    loadingBuilder: (context, child, progress) {
+                                      return progress == null
+                                          ? child
+                                          : Container(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              width: 255.0,
+                                              height: 255.0,
+                                              child:
+                                                  CircularProgressIndicator());
+                                    },
+                                  ),
                                 ),
                               ),
                             ),
