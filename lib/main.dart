@@ -68,9 +68,9 @@ class _MyHomePageState extends State<MyHomePage> {
           width: double.infinity,
           height: double.infinity,
           alignment: Alignment.center,
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(4.0),
           child: Container(
-            padding: EdgeInsets.fromLTRB(16, 64, 16, 128),
+            padding: EdgeInsets.fromLTRB(8, 16, 8, 32),
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.amber[800], width: 2),
                 borderRadius: BorderRadius.circular(8.0)),
@@ -131,7 +131,10 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                           SizedBox(height: 16),
-                          Text('About'),
+                          Text(
+                            'About',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           SizedBox(height: 8),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -142,7 +145,10 @@ class _MyHomePageState extends State<MyHomePage> {
                             ],
                           ),
                           SizedBox(height: 16),
-                          Text('Ingredients'),
+                          Text(
+                            'Ingredients',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           SizedBox(height: 8),
                           Text(snapshot.data.lstStrIngredients.join(', '))
                         ],
