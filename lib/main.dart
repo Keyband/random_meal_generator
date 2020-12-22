@@ -33,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      throw 'Could not launch $url';
+      throw 'It was not possible to open $url.';
     }
   }
 
