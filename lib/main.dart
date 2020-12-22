@@ -129,7 +129,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                               ),
                             ),
-                          )
+                          ),
+                          SizedBox(height: 16),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text('Type: ' + snapshot.data.strCategory),
+                              Text('Region: ' + snapshot.data.strRegion),
+                            ],
+                          ),
+                          SizedBox(height: 16),
                         ],
                       );
                     } else if (snapshot.hasError) {
@@ -157,16 +167,33 @@ class Album {
   final String strMeal;
   final String strMealThumb;
   final String strVideoUrl;
-  // final int id;
-  //final String title;
+  final String strCategory;
+  final String strRegion;
+  final List<String> lstStrIngredients;
 
-  Album({this.strMeal, this.strMealThumb, this.strVideoUrl});
+  Album(
+      {this.strMeal,
+      this.strMealThumb,
+      this.strVideoUrl,
+      this.strCategory,
+      this.strRegion,
+      this.lstStrIngredients});
 
   factory Album.fromJson(Map<String, dynamic> json) {
+    // List<String> localLstStrIngredients;
+    // for (var entry in json) {
+    //   if (entry.contains('strIngredient')) {
+    //     localLstStrIngredients.add(entry);
+    //   }
+    // }
     return Album(
         strMeal: json['strMeal'],
         strMealThumb: json['strMealThumb'],
-        strVideoUrl: json['strYoutube']);
+        strVideoUrl: json['strYoutube'],
+        strCategory: json['strCategory'],
+        strRegion: json['strArea']
+        // lstStrIngredients: localLstStrIngredients
+        );
   }
 }
 
