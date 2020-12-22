@@ -222,7 +222,6 @@ Future<Album> fetchAlbum() async {
 
   if (response.statusCode == 200) {
     var responseBody = dartConvert.jsonDecode(response.body);
-    print(responseBody['meals'][0]['strMeal'] is String);
     return Album.fromJson(responseBody['meals'][0]);
   } else {
     throw Exception('Failed to load album');
