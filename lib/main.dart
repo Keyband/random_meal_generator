@@ -59,6 +59,26 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
         elevation: 0,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.info),
+            onPressed: () {
+              showAboutDialog(
+                  context: context,
+                  applicationVersion: "1.0",
+                  applicationName: "Random Meal Generator",
+                  children: <Widget>[
+                    Text("Made by Guilherme R. Ribeiro.\n\n"),
+                    Text("Credits (tap to open):\n"),
+                    InkWell(
+                      child: Text('-Logo by Freepik, at Flaticon;\n'),
+                      onTap: () => launch(
+                          'https://www.flaticon.com/free-icon/dinner_2217323?term=meal&page=1&position=3&related_item_id=2217323'),
+                    ),
+                  ]);
+            },
+          )
+        ],
       ),
       body: Center(
         child: Container(
