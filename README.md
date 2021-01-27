@@ -1,16 +1,5 @@
-# randommealgenerator
+# Random Meal Generator
 
-A new Flutter project.
+A small project I made with the intent of learning Dart+Flutter. With it I learned how to use APIs better, how to organize widgets on the screen, and how to develop a webapp with PWA support.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Um pequeno projeto que fiz com a intenção de aprender Dart+Flutter. Nele aprendi a usar melhor APIs, como organizar melhor widgets na tela, e como produzir um webapp com suporte PWA.
